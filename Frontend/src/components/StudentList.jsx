@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./StudentList.css"; // Create this for table styling
+import "./StudentList.css";
+import DeleteStudent from "./DeleteStudent";
 
 const StudentList = () => {
     const [students, setStudents] = useState([]);
     const [searchId, setSearchId] = useState("");
     const [filteredStudents, setFilteredStudents] = useState([]);
 
-    // Fetch all students on load
     useEffect(() => {
         fetchStudents();
     }, []);
+    
+    const removeStudentFromUI = (id) => {
+    setFilteredStudents(prev => prev.filter(student => student.id !== id));
+};
 
     const fetchStudents = async () => {
         try {
@@ -65,6 +69,7 @@ const StudentList = () => {
                             <td>{student.contactNumber}</td>
                             <td>{student.collageId !== null && student.collageId !== undefined 
                                     ? student.collageId : "No College"}</td>
+                            <td><DeleteStudent studentId={student.id} onDeleteSuccess={removeStudentFromUI} /></td>
                         </tr>
                     ))}
                 </tbody>
