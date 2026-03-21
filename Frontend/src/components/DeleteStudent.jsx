@@ -26,7 +26,7 @@ const DeleteStudent = ({ studentId, onDeleteSuccess }) => {
             onClick={handleDelete} 
             className="delete-btn"
             style={{
-                backgroundColor: "#de9393",
+                backgroundColor: "#d15e5e",
                 color: "white",
                 border: "none",
                 padding: "6px 12px",

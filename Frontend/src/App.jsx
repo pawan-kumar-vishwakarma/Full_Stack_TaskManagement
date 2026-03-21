@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css'
 import Registration from './components/Registration';
 import StudentList from './components/StudentList';
+import CollegeList from './components/CollegeList'; 
 
 function App() {
-  const [showList, setShowList] = React.useState(false);
+  const [view, setView] = useState("registration");
 
   return (
-    <div>
-      <button onClick={() => setShowList(!showList)}>
-        {showList ? "Go to Registration" : "View All Students"}
-      </button>
+    <div style={{ padding: "20px" }}>
+      <nav style={{ marginBottom: "20px", display: "flex", gap: "10px" }}>
+        <button onClick={() => setView("registration")}>Add Student</button>
+        <button onClick={() => setView("students")}>Student List</button>
+        <button onClick={() => setView("colleges")}>College List</button>
+      </nav>
 
-      {showList ? <StudentList /> : <Registration />}
+      <hr />
+
+      {view === "registration" && <Registration />}
+      {view === "students" && <StudentList />}
+      {view === "colleges" && <CollegeList />}
     </div>
   );
 }
-export default App
+
+export default App;

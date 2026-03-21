@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./StudentList.css";
 import DeleteStudent from "./DeleteStudent";
+import UpdateStudent from "./UpdateStudent";
 
 const StudentList = () => {
     const [students, setStudents] = useState([]);
     const [searchId, setSearchId] = useState("");
     const [filteredStudents, setFilteredStudents] = useState([]);
+    const [editingStudent, setEditingStudent] = useState(null);
 
     useEffect(() => {
         fetchStudents();
@@ -50,6 +52,13 @@ const StudentList = () => {
                 <button onClick={() => {setSearchId(""); setFilteredStudents(students);}}>Reset</button>
             </div>
 
+            {editingStudent && (
+            <UpdateStudent student={editingStudent} 
+            onCancel={() => setEditingStudent(null)} 
+            onUpdateSuccess={() => { 
+            setEditingStudent(null); 
+            fetchStudents(); }} />)}
+
             <table className="student-table">
                 <thead>
                     <tr>
@@ -69,7 +78,13 @@ const StudentList = () => {
                             <td>{student.contactNumber}</td>
                             <td>{student.collageId !== null && student.collageId !== undefined 
                                     ? student.collageId : "No College"}</td>
-                            <td><DeleteStudent studentId={student.id} onDeleteSuccess={removeStudentFromUI} /></td>
+                            <td><button 
+                                    onClick={() => setEditingStudent(student)}
+                                    style={{ marginRight: "10px", backgroundColor: "#4caf50", color: "white", border: "none", padding: "5px 10px", borderRadius: "4px", cursor: "pointer" }}
+                                > Edit </button>
+
+                                <DeleteStudent studentId={student.id} onDeleteSuccess={removeStudentFromUI} />
+                            </td>
                         </tr>
                     ))}
                 </tbody>

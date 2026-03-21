@@ -7,7 +7,7 @@ const Registration = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [contact, setContactNumber] = useState("");
-    const [collageId, setCollageId] = useState(null);
+    const [collageId, setCollageId] = useState("");
     const [userData, setUserData] = useState(null);
     const [message, setMessage] = useState("");
 
