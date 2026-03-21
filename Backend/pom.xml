@@ -66,7 +66,7 @@
         <dependency>
             <groupId>com.spring</groupId>
             <artifactId>TaskManagement</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>jar:0.0.1-SNAPSHOT</version>
         </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
